@@ -181,6 +181,12 @@ pip install langchain
 
 Ok, the code to prepare data is done. [You can check it here](./src/prepare_training_data.py)
 
+I pushed [the dataset on Hugging Face](https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-llama-2), so you can reuse it
+
+I take [this great Google Colab](https://colab.research.google.com/drive/12dVqXZMIVxGI0uutU6HG9RWbWPXL3vts), adjust it a little to use my dataset and run it
+
+And that's it actually. The finished model is [available here on Hugging Face](https://huggingface.co/jmaczan/llama-2-7b-qlora-rick-sanchez-c-137)
+
 ### Sources
 
 https://replicate.com/blog/run-llama-locally
@@ -200,6 +206,10 @@ https://gist.github.com/younesbelkada/9f7f75c94bdc1981c8ca5cc937d4a4da
 https://github.com/artidoro/qlora
 
 https://colab.research.google.com/drive/12dVqXZMIVxGI0uutU6HG9RWbWPXL3vts
+
+https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-llama-2
+
+https://huggingface.co/jmaczan/llama-2-7b-qlora-rick-sanchez-c-137
 
 Inspiration: https://towardsdatascience.com/make-your-own-rick-sanchez-bot-with-transformers-and-dialogpt-fine-tuning-f85e6d1f4e30
 
