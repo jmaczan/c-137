@@ -79,7 +79,65 @@ or
 
 What is human text and assistant text in case of the transcript? That's some decision to make. [We have info about speaker and their line](https://huggingface.co/datasets/Prarabdha/Rick_and_Morty_Transcript/viewer/Prarabdha--Rick_and_Morty_Transcript/train), so maybe we can loop through all rows and merge all non-Rick dialogues to human_text and once Rick is speaking, put his line to assistant_text and repeat it until we reach end of the transcript. But I dislike these descriptions of actions which are in dialogues and they are indistinguishable from the words a character says. I find [another dataset with transcription on Kaggle](https://www.kaggle.com/datasets/andradaolteanu/rickmorty-scripts) which seems to not have these actions descriptions
 
-#### Sources
+I find [this neat colab](https://colab.research.google.com/drive/12dVqXZMIVxGI0uutU6HG9RWbWPXL3vts) and decide to go with fine tuning their way. They're using AlexanderDoria/novel17_test dataset, which when you inspect it, it's a [JSONL file](https://hackernoon.com/json-lines-format-76353b4e588d) (it wraps all content with an array and so you can keep all data in one line - saves disk space). Sample object has this structure
+
+```
+{"text":"### Human: Some human text going here### Assistant: Assistant's response here"},{"text":"... and so on
+```
+
+[Dataset I'm going to use](https://www.kaggle.com/datasets/andradaolteanu/rickmorty-scripts) is a csv with the following columns
+
+```
+index	season no.	episode no.	episode name	name	line
+```
+
+We can skip all columns except name and line, unless we want to do some fancy stuff like make Rick recognize in which episode he said a given line
+
+My initial approach to data processing will be to iterate through the file and
+
+GLOBAL INITIALIZATION
+
+- once - at the beginning of processing - create a prompt template `{"text":"### Human: {other_lines} ### Assistant: {rick_lines}"}`
+- create a temp empty strings `other_lines` and `rick_lines`
+- we will have two pointers (one local and one global)
+- global pointer initalized to -1
+- global output initialized to empty string
+- calculate total number of lines and store it in `total_lines_count` variable
+
+NEXT GLOBAL LINE
+
+- global pointer += 1
+- if global pointer is equal to total_lines_count, stop the script and save global output to data.jsonl file
+- local pointer initalized to 0
+- set empty strings to `other_lines` and `rick_lines`
+
+NEXT LOCAL LINE
+
+- get row of index = global + local
+- if current line is not Rick's line and `rick_lines` is not empty:
+  - add template filled with `other_lines` and `rick_lines` to global output and append `', ` at the end of the prompt template
+  - go to NEXT GLOBAL LINE
+- preprocess row's line content and store it in local variable `preprocessed_line`
+  - remove all double quotes from lines
+- if current line is not Rick's line, then append it to `other_lines += preprocessed_line + ' '`
+- if current line is Rick's line, then append it to `rick_lines` += preprocessed_line + ' '`
+- local pointer += 1
+- go to NEXT LOCAL LINE
+
+We can also think of
+
+- remove first row because it doesn't have other person text before Rick's line
+- create a bunch of questions and answers to learn Rick who is he, who are people around him etc
+- if we wanted to clear Rick's memory, we could remove all names from the dataset and replace them with "you" or something
+- combining all names and lines before Rick's line into one prompt, like
+
+```
+{"text":"### Human: Jerry said 'Damn it!'. Beth said 'Jerry!'. Jerry said 'Beth!'. Summer said 'Oh my god, my parents are so loud, I want to die.' ### Assistant: Mm, there is no God, Summer. You gotta rip that band-aid off now. You'll thank me later."}
+```
+
+Not sure what kind of combining few lines into Human prompt would be the most effective one, so I guess it needs some experiments to be done
+
+### Sources
 
 https://replicate.com/blog/run-llama-locally
 
@@ -96,6 +154,8 @@ https://www.kaggle.com/datasets/andradaolteanu/rickmorty-scripts
 https://gist.github.com/younesbelkada/9f7f75c94bdc1981c8ca5cc937d4a4da
 
 https://github.com/artidoro/qlora
+
+https://colab.research.google.com/drive/12dVqXZMIVxGI0uutU6HG9RWbWPXL3vts
 
 Inspiration: https://towardsdatascience.com/make-your-own-rick-sanchez-bot-with-transformers-and-dialogpt-fine-tuning-f85e6d1f4e30
 
