@@ -195,7 +195,7 @@ I do another [training based on this article](https://towardsdatascience.com/fin
 
 In order to make it work, I need to adjust the data. [You can see a script here](./src/prepare_training_data_as_csv.py)
 
-It products dataset.csv, which needs some post processing, because it appends some excessive empty columns
+It produces dataset.csv, which needs some post processing, because it appends some excessive empty columns
 
 [I publish the correct dataset on Hugging Face](https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-llama-2) and [update the old one to have proper naming](https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-vicuna-1)
 
