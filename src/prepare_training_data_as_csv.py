@@ -83,6 +83,3 @@ while global_pointer < total_lines_count:
     )
 
 global_output.to_csv("dataset.csv", index=False)
-
-# with open("dataset.csv", "w+") as f:
-#    f.write(global_output)
