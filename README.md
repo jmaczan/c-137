@@ -203,6 +203,8 @@ Anyway, here it is! [Google Colab with fine tuning by PEFT, using Torch, Transfo
 
 To see how it performs, [you can click here to scroll to the example](https://colab.research.google.com/drive/1berHyEuuPtMaYMYD1EYK3J7dv3Qzv7cg#scrollTo=_zG_-Ew64bbF)
 
+The model is [hosted on Hugging Face](https://huggingface.co/jmaczan/llama-2-7b-rick-c-137) as well
+
 🤗 Thanks for reading
 
 ### Sources
