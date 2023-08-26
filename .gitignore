@@ -162,3 +162,4 @@ cython_debug/
 
 RickAndMortyScripts.csv
 dataset.jsonl
+dataset.csv

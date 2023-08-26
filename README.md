@@ -187,6 +187,24 @@ I take [this great Google Colab](https://colab.research.google.com/drive/12dVqXZ
 
 And that's it actually. The finished model is [available here on Hugging Face](https://huggingface.co/jmaczan/llama-2-7b-qlora-rick-sanchez-c-137)
 
+The model seems to be crappy. I'm not sure what I did wrong. I think the prompt format could be bad, actually. I learn that it's likely Vicuna 1 format
+
+Time for second round of training
+
+I do another [training based on this article](https://towardsdatascience.com/fine-tune-your-own-llama-2-model-in-a-colab-notebook-df9823a04a32)
+
+In order to make it work, I need to adjust the data. [You can see a script here](./src/prepare_training_data_as_csv.py)
+
+It products dataset.csv, which needs some post processing, because it appends some excessive empty columns
+
+[I publish the correct dataset on Hugging Face](https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-llama-2) and [update the old one to have proper naming](https://huggingface.co/datasets/jmaczan/rick-and-morty-scripts-vicuna-1)
+
+Anyway, here it is! [Google Colab with fine tuning by PEFT, using Torch, Transformers, trl for SFT and QLoRA on 4 bits](https://colab.research.google.com/drive/1berHyEuuPtMaYMYD1EYK3J7dv3Qzv7cg). The foundation model is `meta-llama/Llama-2-7b-chat-hf`
+
+To see how it performs, [you can click here to scroll to the example](https://colab.research.google.com/drive/1berHyEuuPtMaYMYD1EYK3J7dv3Qzv7cg#scrollTo=_zG_-Ew64bbF)
+
+🤗 Thanks for reading
+
 ### Sources
 
 https://replicate.com/blog/run-llama-locally
