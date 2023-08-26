@@ -179,6 +179,8 @@ Let's install langchain to help with some stuff, for now I just going to use it 
 pip install langchain
 ```
 
+Ok, the code to prepare data is done. [You can check it here](./src/prepare_training_data.py)
+
 ### Sources
 
 https://replicate.com/blog/run-llama-locally
