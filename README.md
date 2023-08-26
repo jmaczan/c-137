@@ -137,6 +137,48 @@ We can also think of
 
 Not sure what kind of combining few lines into Human prompt would be the most effective one, so I guess it needs some experiments to be done
 
+Let's start implementing script for preparing training data
+
+First, create venv
+
+```
+python3 -m venv venv
+```
+
+I have Python installed as `python3`, you may need to replace it with `python` or whatever you named it. Same goes for `pip3 -> pip`
+
+Activate it
+
+```
+source venv/bin/activate
+```
+
+I use pandas to manipulate csv data
+
+```
+pip install pandas
+```
+
+Since [dataset is on Kaggle](https://www.kaggle.com/datasets/andradaolteanu/rickmorty-scripts?resource=download) (you need to sign up first), let's install kaggle as well
+
+```
+pip install kaggle
+```
+
+Go to [settings in Kaggle web app](https://www.kaggle.com/settings) and click Create New Token. It generates and downloads an API token, which you need to copy into `~/.kaggle/kaggle.json` (you need to `mkdir ~/.kaggle` first)
+
+Set correct rights on the file
+
+```
+chmod 600 ~/.kaggle/kaggle.json
+```
+
+Let's install langchain to help with some stuff, for now I just going to use it for prompt formatting
+
+```
+pip install langchain
+```
+
 ### Sources
 
 https://replicate.com/blog/run-llama-locally
