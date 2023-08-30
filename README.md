@@ -1,6 +1,6 @@
 <p align="center"><img src="./assets/hi-thanks-for-reading-my-filename.png" alt="hi-thanks-for-reading-my-filename.png" style="height: 200px; width:200px;"/></p>
 
-<p align="center"><code>Llama 2 7B on Apple M2 fine-tuned to revive Rick</code></p>
+<p align="center"><code>Llama 2 7B fine-tuned to revive Rick</code></p>
 
 ### Dear diary
 
